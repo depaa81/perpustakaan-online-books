@@ -1,1 +1,12 @@
-
+{
+  "books": [
+    {
+      "title": "Belajar dari Kegagalan",
+      "link": "https://example.com/book1.pdf"
+    },
+    {
+      "title": "Motivasi Hidup Sukses",
+      "link": "https://example.com/book2.pdf"
+    }
+  ]
+}
