@@ -9,24 +9,26 @@
 <body>
   <header>
     <h1>📚 Perpustakaan Online</h1>
-    <div class="top-bar">
-      <input type="text" id="search" placeholder="Cari buku..." />
-      <label class="switch">
-        <input type="checkbox" id="toggle-dark" />
-        <span class="slider"></span>
-      </label>
-    </div>
   </header>
 
-  <section class="filters">
-    <button class="filter-btn active" data-category="all">Semua</button>
-    <button class="filter-btn" data-category="Novel">Novel</button>
-    <button class="filter-btn" data-category="Teknologi">Teknologi</button>
-    <button class="filter-btn" data-category="Non-Fiksi">Non-Fiksi</button>
-    <button id="favorites-btn">❤️ Favorit</button>
-  </section>
+  <main>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Cari buku..." />
+      <button id="toggleDarkMode" class="darkmode-btn">
+        <span class="icon">🌙</span>
+      </button>
+    </div>
 
-  <main id="book-list"></main>
+    <div class="filter-container">
+      <button class="filter-btn active" data-category="all">Semua</button>
+      <button class="filter-btn" data-category="Novel">Novel</button>
+      <button class="filter-btn" data-category="Non-Fiksi">Non-Fiksi</button>
+      <button class="filter-btn" data-category="Teknologi">Teknologi</button>
+      <button id="favoritesBtn" class="filter-btn">❤️ Favorit</button>
+    </div>
+
+    <div id="book-list" class="book-list"></div>
+  </main>
 
   <script src="script.js"></script>
 </body>
