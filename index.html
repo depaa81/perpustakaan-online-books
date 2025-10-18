@@ -4,34 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Perpustakaan Online</title>
-  <link rel="stylesheet" href="./style.css" />
-  <script src="./script.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
     <h1>📚 Perpustakaan Online</h1>
-    <input type="text" id="searchInput" placeholder="Cari judul buku..." />
-    <label class="switch">
-  <input type="checkbox" id="toggle-dark">
-  <span class="slider"></span>
-</label>
-
+    <div class="top-bar">
+      <input type="text" id="search" placeholder="Cari buku..." />
+      <label class="switch">
+        <input type="checkbox" id="toggle-dark" />
+        <span class="slider"></span>
+      </label>
+    </div>
   </header>
 
-  <main>
-    <div class="filter">
-      <button class="filter-btn active" data-category="all">Semua</button>
-      <button class="filter-btn" data-category="Pemrograman">Pemrograman</button>
-      <button class="filter-btn" data-category="Novel">Novel</button>
-      <button class="filter-btn" data-category="Teknologi">Teknologi</button>
-      <button id="showFavorites">❤️ Favorit</button>
-    </div>
+  <section class="filters">
+    <button class="filter-btn active" data-category="all">Semua</button>
+    <button class="filter-btn" data-category="Novel">Novel</button>
+    <button class="filter-btn" data-category="Teknologi">Teknologi</button>
+    <button class="filter-btn" data-category="Non-Fiksi">Non-Fiksi</button>
+    <button id="favorites-btn">❤️ Favorit</button>
+  </section>
 
-    <ul id="bookList"></ul>
-  </main>
+  <main id="book-list"></main>
 
-  <footer>
-    <p>Perpustakaan Online © 2025</p>
-  </footer>
+  <script src="script.js"></script>
 </body>
 </html>
