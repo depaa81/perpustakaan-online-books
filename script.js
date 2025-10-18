@@ -74,14 +74,22 @@ searchInput.addEventListener("input", () => {
   filterBooks(activeCategory);
 });
 
+// --- DARK MODE ---
+function updateDarkButton() {
+  toggleDarkMode.textContent = darkMode ? "☀️ Light" : "🌙 Dark";
+}
+
 toggleDarkMode.addEventListener("click", () => {
   darkMode = !darkMode;
   document.body.classList.toggle("dark", darkMode);
   localStorage.setItem("darkMode", darkMode);
+  updateDarkButton();
 });
 
 document.body.classList.toggle("dark", darkMode);
+updateDarkButton(); // << tambahkan ini agar label awal sesuai mode
 renderBooks(books);
+
 
 // fallback: jika script tidak termuat di vercel
 if (!document.querySelector('script[src*="script.js"]')) {
