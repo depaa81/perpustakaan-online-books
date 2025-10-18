@@ -68,7 +68,7 @@ header {
   padding: 1rem;
   border-radius: 12px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
+  transition: transform 0.2s, background 0.3s, color 0.3s;
 }
 
 .book-card:hover {
@@ -101,19 +101,29 @@ body.dark {
 }
 
 body.dark header {
-  background: #222;
+  background: #1e1e1e;
 }
 
 body.dark .filter-btn,
 body.dark #favorites-btn {
-  background: #222;
+  background: #1e1e1e;
   color: #eee;
-  border-color: #666;
+  border-color: #555;
 }
 
 body.dark .filter-btn.active {
-  background: #00aaff;
+  background: #2196f3;
   color: #fff;
+}
+
+body.dark .book-card {
+  background: #1f1f1f;
+  color: #f5f5f5;
+  box-shadow: 0 2px 5px rgba(255,255,255,0.05);
+}
+
+body.dark .book-card a {
+  color: #64b5ff;
 }
 
 /* === TOGGLE SWITCH === */
