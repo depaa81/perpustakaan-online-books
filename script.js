@@ -79,12 +79,21 @@ function updateDarkButton() {
   toggleDarkMode.textContent = darkMode ? "☀️ Light" : "🌙 Dark";
 }
 
-toggleDarkMode.addEventListener("click", () => {
-  darkMode = !darkMode;
+// === DARK MODE SWITCH ===
+const darkSwitch = document.getElementById("toggle-dark");
+
+// set awal dari localStorage
+let darkMode = JSON.parse(localStorage.getItem("darkMode")) || false;
+document.body.classList.toggle("dark", darkMode);
+darkSwitch.checked = darkMode;
+
+// kalau diklik
+darkSwitch.addEventListener("change", () => {
+  darkMode = darkSwitch.checked;
   document.body.classList.toggle("dark", darkMode);
   localStorage.setItem("darkMode", darkMode);
-  updateDarkButton();
 });
+
 
 document.body.classList.toggle("dark", darkMode);
 updateDarkButton(); // << tambahkan ini agar label awal sesuai mode
