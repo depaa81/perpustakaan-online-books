@@ -1,45 +1,49 @@
+// === DATA BUKU ===
 const books = [
-  { title: "Belajar HTML Dasar", link: "https://www.w3schools.com/html/", category: "Pemrograman", rating: 4 },
-  { title: "Pemrograman JavaScript Modern", link: "https://javascript.info/", category: "Pemrograman", rating: 5 },
-  { title: "Dasar-dasar Python", link: "https://www.learnpython.org/", category: "Pemrograman", rating: 5 },
-  { title: "AI untuk Pemula", link: "https://www.ibm.com/topics/ai", category: "Teknologi", rating: 5 },
-  { title: "Laskar Pelangi", link: "https://id.wikipedia.org/wiki/Laskar_Pelangi", category: "Novel", rating: 4 }
+  { title: "Belajar HTML Dasar", category: "Teknologi", link: "https://www.w3schools.com/html/" },
+  { title: "Panduan CSS Modern", category: "Teknologi", link: "https://www.w3schools.com/css/" },
+  { title: "Filosofi Kopi", category: "Novel", link: "https://www.goodreads.com/book/show/350064" },
+  { title: "Sejarah Dunia Singkat", category: "Non-Fiksi", link: "https://example.com/sejarah" },
+  { title: "Belajar JavaScript", category: "Teknologi", link: "https://www.javascript.info/" },
 ];
 
-const bookList = document.getElementById("bookList");
-const searchInput = document.getElementById("searchInput");
+// === ELEMENT ===
+const bookList = document.getElementById("book-list");
+const searchInput = document.getElementById("search");
 const filterBtns = document.querySelectorAll(".filter-btn");
-const favoritesBtn = document.getElementById("showFavorites");
-const toggleDarkMode = document.getElementById("toggleDarkMode");
+const favoritesBtn = document.getElementById("favorites-btn");
+const darkSwitch = document.getElementById("toggle-dark");
 
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-let darkMode = localStorage.getItem("darkMode") === "true";
+let darkMode = JSON.parse(localStorage.getItem("darkMode")) || false;
+document.body.classList.toggle("dark", darkMode);
+darkSwitch.checked = darkMode;
 
+// === RENDER BUKU ===
 function renderBooks(list) {
-  bookList.innerHTML = "";
-  list.forEach(b => {
-    const li = document.createElement("li");
-    li.className = "book-item";
-    const isFav = favorites.includes(b.title);
-    li.innerHTML = `
-      <a href="${b.link}" target="_blank">${b.title}</a>
-      <button class="fav-btn" data-title="${b.title}">${isFav ? "❤️" : "🤍"}</button>
-      <p>Kategori: ${b.category} | Rating: ⭐${b.rating}</p>
-    `;
-    bookList.appendChild(li);
-  });
+  bookList.innerHTML = list.map(book => `
+    <div class="book-card">
+      <h3>${book.title}</h3>
+      <p>Kategori: ${book.category}</p>
+      <a href="${book.link}" target="_blank">Baca Buku</a>
+      <button class="fav-btn ${favorites.includes(book.title) ? "active" : ""}" data-title="${book.title}">❤️</button>
+    </div>
+  `).join("");
 }
 
-function filterBooks(category) {
-  const keyword = searchInput.value.toLowerCase();
+renderBooks(books);
+
+// === FILTER BUKU ===
+function filterBooks(category, keyword = "") {
   const filtered = books.filter(b => {
-    const matchCategory = category === "all" || b.category === category;
-    const matchSearch = b.title.toLowerCase().includes(keyword);
-    return matchCategory && matchSearch;
+    const matchCat = category === "all" || b.category === category;
+    const matchSearch = b.title.toLowerCase().includes(keyword.toLowerCase());
+    return matchCat && matchSearch;
   });
   renderBooks(filtered);
 }
 
+// === FAVORIT ===
 function toggleFavorite(title) {
   if (favorites.includes(title)) {
     favorites = favorites.filter(f => f !== title);
@@ -47,9 +51,10 @@ function toggleFavorite(title) {
     favorites.push(title);
   }
   localStorage.setItem("favorites", JSON.stringify(favorites));
-  filterBooks(document.querySelector(".filter-btn.active").dataset.category);
+  renderBooks(books);
 }
 
+// === EVENT LISTENER ===
 bookList.addEventListener("click", e => {
   if (e.target.classList.contains("fav-btn")) {
     toggleFavorite(e.target.dataset.title);
@@ -60,7 +65,7 @@ filterBtns.forEach(btn => {
   btn.addEventListener("click", () => {
     filterBtns.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
-    filterBooks(btn.dataset.category);
+    filterBooks(btn.dataset.category, searchInput.value);
   });
 });
 
@@ -70,40 +75,13 @@ favoritesBtn.addEventListener("click", () => {
 });
 
 searchInput.addEventListener("input", () => {
-  const activeCategory = document.querySelector(".filter-btn.active").dataset.category;
-  filterBooks(activeCategory);
+  const activeCat = document.querySelector(".filter-btn.active").dataset.category;
+  filterBooks(activeCat, searchInput.value);
 });
 
-// --- DARK MODE ---
-function updateDarkButton() {
-  toggleDarkMode.textContent = darkMode ? "☀️ Light" : "🌙 Dark";
-}
-
-// === DARK MODE SWITCH ===
-const darkSwitch = document.getElementById("toggle-dark");
-
-// set awal dari localStorage
-let darkMode = JSON.parse(localStorage.getItem("darkMode")) || false;
-document.body.classList.toggle("dark", darkMode);
-darkSwitch.checked = darkMode;
-
-// kalau diklik
+// === DARK MODE ===
 darkSwitch.addEventListener("change", () => {
   darkMode = darkSwitch.checked;
   document.body.classList.toggle("dark", darkMode);
   localStorage.setItem("darkMode", darkMode);
 });
-
-
-document.body.classList.toggle("dark", darkMode);
-updateDarkButton(); // << tambahkan ini agar label awal sesuai mode
-renderBooks(books);
-
-
-// fallback: jika script tidak termuat di vercel
-if (!document.querySelector('script[src*="script.js"]')) {
-  const s = document.createElement("script");
-  s.src = "./script.js";
-  document.body.appendChild(s);
-                     }
-      
