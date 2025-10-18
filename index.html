@@ -1,73 +1,33 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>📚 Perpustakaan Online PRO</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perpustakaan Online</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="./script.js" defer></script>
 </head>
-<body class="bg-gray-50 text-gray-800">
-  <header class="bg-indigo-600 text-white py-5 shadow-lg flex justify-between items-center px-4">
-    <h1 class="text-2xl font-bold">📚 Perpustakaan Online PRO</h1>
-    <button id="themeToggle" class="bg-indigo-800 px-3 py-1 rounded-md text-sm">🌙 Dark</button>
+<body>
+  <header>
+    <h1>📚 Perpustakaan Online</h1>
+    <input type="text" id="searchInput" placeholder="Cari judul buku..." />
+    <button id="toggleDarkMode">🌙</button>
   </header>
 
-  <nav class="bg-white shadow-md flex justify-center gap-5 py-3 sticky top-0 z-10">
-    <button class="nav-btn font-semibold text-indigo-600" data-page="home">Beranda</button>
-    <button class="nav-btn text-gray-600 hover:text-indigo-600" data-page="favorite">Favorit</button>
-    <button class="nav-btn text-gray-600 hover:text-indigo-600" data-page="about">Tentang</button>
-  </nav>
-
-  <main id="page-home" class="max-w-3xl mx-auto p-5">
-    <div class="bg-white shadow-md rounded-xl p-6 mt-6">
-      <input id="searchInput" type="text" placeholder="🔍 Cari judul buku..." class="border rounded-md p-2 w-full mb-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-      <div class="flex flex-col sm:flex-row gap-3">
-        <select id="categoryFilter" class="border p-2 rounded-md flex-1">
-          <option value="">Semua Kategori</option>
-          <option value="Teknologi">Teknologi</option>
-          <option value="Pemrograman">Pemrograman</option>
-          <option value="Sains">Sains</option>
-          <option value="Bisnis">Bisnis</option>
-          <option value="Desain">Desain</option>
-        </select>
-        <select id="sortFilter" class="border p-2 rounded-md flex-1">
-          <option value="">Urutkan</option>
-          <option value="az">Judul A–Z</option>
-          <option value="za">Judul Z–A</option>
-          <option value="rating">Rating Tertinggi</option>
-          <option value="favorite">Favorit Duluan</option>
-        </select>
-      </div>
+  <main>
+    <div class="filter">
+      <button class="filter-btn active" data-category="all">Semua</button>
+      <button class="filter-btn" data-category="Pemrograman">Pemrograman</button>
+      <button class="filter-btn" data-category="Novel">Novel</button>
+      <button class="filter-btn" data-category="Teknologi">Teknologi</button>
+      <button id="showFavorites">❤️ Favorit</button>
     </div>
 
-    <section class="bg-white shadow-md rounded-xl p-6 mt-6">
-      <h2 class="text-xl font-semibold mb-4">📖 Daftar Buku</h2>
-      <ul id="bookList" class="divide-y divide-gray-200"></ul>
-    </section>
+    <ul id="bookList"></ul>
   </main>
 
-  <main id="page-favorite" class="max-w-3xl mx-auto p-5 hidden">
-    <section class="bg-white shadow-md rounded-xl p-6 mt-6">
-      <h2 class="text-xl font-semibold mb-4">⭐ Buku Favorit Saya</h2>
-      <ul id="favoriteList" class="divide-y divide-gray-200"></ul>
-    </section>
-  </main>
-
-  <main id="page-about" class="max-w-3xl mx-auto p-5 hidden">
-    <section class="bg-white shadow-md rounded-xl p-6 mt-6 leading-relaxed">
-      <h2 class="text-xl font-semibold mb-3">Tentang Aplikasi</h2>
-      <p>Ini adalah versi <b>Perpustakaan Online PRO</b> yang dirancang untuk berjalan 100% offline tanpa database. Semua data disimpan di perangkat pengguna menggunakan <code>localStorage</code>.</p>
-      <p class="mt-2">Fitur: Mode Gelap, Kategori, Rating, Favorit, dan Sortir Buku. 💡</p>
-      <p class="mt-4 text-gray-500 text-sm">Dibuat oleh <b>xyes</b> • 2025</p>
-    </section>
-  </main>
-
-  <footer class="text-center text-gray-600 py-6 text-sm">
-    &copy; 2025 Perpustakaan Online PRO | Dibuat dengan ❤️ oleh xyes
+  <footer>
+    <p>Perpustakaan Online © 2025</p>
   </footer>
-
-  <script src="script.js"></script>
 </body>
-      </html>
-      
+</html>
